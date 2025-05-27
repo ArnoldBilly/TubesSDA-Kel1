@@ -1,7 +1,7 @@
 /*File body untuk ADT Queue*/
 //Dibuat tanggal 28-3-2013
 
-#include "queue_.h"
+#include "queue.h"
 #include "SpNRSLL.H"
 #include "malloc.h"
 
