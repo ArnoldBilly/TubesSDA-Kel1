@@ -2,6 +2,9 @@
 #include "hanif.h"
 
 int main(){
-    displayBiodata();
+    Peserta peserta;
+    User user;
+    displayBiodata(&peserta);
+    addPeserta(&peserta,&user);
     return 0;
 }

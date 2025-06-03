@@ -1,0 +1,12 @@
+`úôd,
+Nama Lengkap    : aSSASA
+Tempat Lahir    : SDASDA
+Tanggal Lahir   : ASDASD
+NISN            : ASDASDA
+NPSN            : ASDASDA
+Nama Sekolah    : ADAD
+Nama Ayah       : ASDASDAD
+Nama Ibu        : SDADAS
+Jumlah Tanggungan : ADADASD
+Gaji Ayah       : SSDASDA
+Gaji Ibu        : ADASD
