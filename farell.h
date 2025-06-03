@@ -1,12 +1,12 @@
-#ifndef SDA_H
-#define SDA_H
+#ifndef FARELL_H
+#define FARELL_H
 
 #include "queue_.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-// Konstanta
+
 #define MAX_EMAIL 100
 #define MAX_PASSWORD 100
 #define MAX_NAMA 50
