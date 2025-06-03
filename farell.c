@@ -82,7 +82,11 @@ int loginAkun(User* head, char* email, char* password) {
 
 void isiBiodata(dataPeserta** pesertaHead, char* nisn) {
     dataPeserta* peserta = (dataPeserta*)malloc(sizeof(dataPeserta));
-    strcpy(peserta->nisn, nisn);
+    char nisnTruncated[5] = {0};
+    for (int i = 0; i < 4 && nisn[i] != '\0'; i++) {
+        nisnTruncated[i] = nisn[i];
+    }
+    strcpy(peserta->nisn, nisnTruncated);
     printf("Pengisian Biodata\n");
     printf("Nama: ");
     fgets(peserta->nama, MAX_NAMA, stdin);
@@ -117,13 +121,14 @@ dataPeserta* cariPeserta(dataPeserta* head, char* nisn) {
 
 void enqueuePeserta(Queue* Q, char* nisn, dataPeserta* pesertaHead) {
     int id = 0;
-    for (int i = 0; i < strlen(nisn) && i < 4; i++) {
+    char nisnTruncated[5] = {0};
+    for (int i = 0; i < 4 && nisn[i] != '\0'; i++) {
+        nisnTruncated[i] = nisn[i];
         if (nisn[i] >= '0' && nisn[i] <= '9') {
             id = id * 10 + (nisn[i] - '0');
         }
     }
-    // Debugging: Tampilkan ID yang di-enqueue
-    printf("Enqueuing ID: %d for NISN: %s\n", id, nisn);
+    printf("Enqueuing ID: %d for NISN: %s\n", id, nisnTruncated);
     EnQueue(Q, id);
 }
 
@@ -133,9 +138,12 @@ dataPeserta* dequeuePeserta(Queue* Q, dataPeserta* pesertaHead) {
         deQueue(Q, &id);
         char nisn[5];
         sprintf(nisn, "%d", id);
+        printf("Debug: Dequeuing ID %d, searching NISN %s\n", id, nisn);
         dataPeserta* peserta = cariPeserta(pesertaHead, nisn);
         if (peserta == NULL) {
-            printf("Warning: No matching peserta for ID %d\n", id);
+            printf("Warning: No matching peserta for ID %d (NISN %s)\n", id, nisn);
+        } else {
+            printf("Debug: Found peserta with NISN %s\n", peserta->nisn);
         }
         return peserta;
     }

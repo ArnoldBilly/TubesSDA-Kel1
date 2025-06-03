@@ -65,4 +65,19 @@ int main() {
                 printf("Pilihan tidak valid!\n");
         }
     }
+
+    // Bebaskan memori
+    User* currentUser = akunHead;
+    while (currentUser != NULL) {
+        User* temp = currentUser;
+        currentUser = currentUser->next;
+        free(temp);
+    }
+    dataPeserta* currentPeserta = pesertaHead;
+    while (currentPeserta != NULL) {
+        dataPeserta* temp = currentPeserta;
+        currentPeserta = currentPeserta->next;
+        free(temp);
+    }
+    return 0;
 }
