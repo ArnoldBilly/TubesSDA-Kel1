@@ -1,126 +1,126 @@
 #include "hanif.h"
+#include "SpNRSLL.H"
+#include "STACK.H"
 
-void displayBiodata(Peserta *peserta){
-    int choice;
+void displayPemilihanProdi(Stack *stack) {
+    char* PTN[55] = {
+    "Universitas Indonesia (UI)", "Universitas Gadjah Mada (UGM)", "Institut Teknologi Bandung (ITB)", "Universitas Brawijaya (UB)", "Universitas Airlangga (Unair)", "IPB University", "Universitas Sebelas Maret (UNS)", "Universitas Diponegoro (Undip)", "Institut Teknologi Sepuluh Nopember (ITS)", "Universitas Pendidikan Indonesia (UPI)",
+    "Universitas Hasanuddin (Unhas)", "Universitas Sumatera Utara (USU)", "Universitas Andalas (Unand)", "Universitas Negeri Malang (UM)", "Universitas Negeri Yogyakarta (UNY)", "Universitas Jember (Unej)", "Universitas Negeri Semarang (Unnes)", "Universitas Lampung (Unila)", "Universitas Syiah Kuala (USK)", "Universitas Udayana (Unud)",
+    "Universitas Riau (Unri)", "Universitas Mataram (Unram)", "Universitas Negeri Makassar (UNM)", "Universitas Negeri Padang (UNP)", "Universitas Negeri Surabaya (Unesa)", "Universitas Negeri Medan (Unimed)", "Universitas Negeri Jakarta (UNJ)", "Universitas Sultan Ageng Tirtayasa (Untirta)", "Universitas Muhammadiyah Surakarta (UMS)", "Universitas Lampung (Unila)",
+    "Institut Teknologi Bandung (ITB)", "Institut Pertanian Bogor (IPB University)", "Institut Teknologi Sepuluh Nopember (ITS)", "Institut Teknologi Nasional (ITENAS)", "Institut Teknologi Telkom Purwokerto", "Institut Teknologi Nasional Malang (ITN Malang)", "Institut Teknologi Kalimantan (ITK)", "Institut Teknologi Sumatera (ITERA)", "Institut Teknologi Del", "Institut Seni Indonesia Yogyakarta (ISI Yogyakarta)",
+    "Politeknik Elektronika Negeri Surabaya (PENS)", "Politeknik Negeri Medan (Polmed)", "Politeknik LP3I Bandung", "Politeknik Manufaktur Negeri Bangka Belitung", "Politeknik Pertanian Negeri Kupang", "Politeknik Negeri Lhokseumawe", "Politeknik Perkapalan Negeri Surabaya", "Politeknik Negeri Tanah Laut", "Politeknik Negeri Banjarmasin", "Politeknik Negeri Batam",
+    "Politeknik Negeri Jakarta (PNJ)", "Politeknik Negeri Bandung (Polban)", "Politeknik Negeri Semarang (Polines)", "Politeknik Negeri Sriwijaya (Polsri)", "Politeknik Negeri Malang (Polinema)"
+};
+
+char* jurusanUniversitas[] = {
+    "Kedokteran", "Hukum", "Ilmu Komunikasi", "Psikologi", "Manajemen", "Akuntansi", "Ilmu Politik", "Sastra Inggris",
+    "Sastra Indonesia", "Hubungan Internasional", "Ilmu Pemerintahan", "Teknik Sipil", "Teknik Elektro", "Teknik Industri",
+    "Teknik Kimia", "Arsitektur", "Pendidikan Matematika", "Pendidikan Bahasa Inggris", "Pendidikan Guru Sekolah Dasar",
+    "Pendidikan Biologi", "Agribisnis", "Peternakan", "Ilmu Komputer", "Statistika", "Ekonomi Pembangunan"
+};
+
+char* jurusanInstitut[] = {
+    "Teknik Informatika", "Sistem Informasi", "Teknik Elektro", "Teknik Mesin", "Teknik Sipil", "Teknik Kimia", "Teknik Fisika",
+    "Teknik Biomedik", "Rekayasa Perangkat Lunak", "Teknik Industri", "Teknik Lingkungan", "Teknik Geofisika", "Teknik Geologi",
+    "Teknik Material", "Matematika", "Fisika", "Biologi", "Desain Produk", "Desain Komunikasi Visual", "Aktuaria"
+};
+
+char* jurusanPoliteknik[] = {
+    "Teknik Informatika", "Teknik Komputer", "Manajemen Informatika", "Teknik Elektronika", "Teknik Telekomunikasi",
+    "Teknik Mesin", "Teknik Pendingin dan Tata Udara", "Teknik Sipil", "Akuntansi", "Administrasi Bisnis", "Perhotelan",
+    "Pariwisata", "Teknik Listrik", "Manufaktur", "Teknik Otomotif", "Teknik Kimia Industri", "Teknik Instrumentasi",
+    "Logistik Industri", "Keuangan dan Perbankan", "Teknik Energi Terbarukan"
+};
+
+    Prodi input;
+    char pilihan;
+    int i = 1;
+    int jumlahProdi = 0;
+
     do {
-        system("cls");
-        printf("===================================================\n");
-        printf("     PROGRAM PENDAFTARAN UTBK - Peserta Peserta       \n");
-        printf("===================================================\n\n");
-
-        printf("  >>> Peserta DIRI CALON PESERTA <<<\n");
-        printf("  1. Nama Lengkap (sesuai ijazah) : ");
-        fgets(peserta->namaLengkap, sizeof(peserta->namaLengkap), stdin);
-        peserta->namaLengkap[strcspn(peserta->namaLengkap, "\n")] = 0;
-
-        printf("  2. Tempat Lahir                 : ");
-        fgets(peserta->tempatLahir, sizeof(peserta->tempatLahir), stdin);
-        peserta->tempatLahir[strcspn(peserta->tempatLahir, "\n")] = 0;
-
-        printf("  3. Tanggal Lahir (DD-MM-YYYY)   : ");
-        fgets(peserta->tanggalLahir, sizeof(peserta->tanggalLahir), stdin);
-        peserta->tanggalLahir[strcspn(peserta->tanggalLahir, "\n")] = 0;
-
-        printf("  4. NISN                         : ");
-        fgets(peserta->nisn, sizeof(peserta->nisn), stdin);
-        peserta->nisn[strcspn(peserta->nisn, "\n")] = 0;
-
-        printf("  5. NPSN                         : ");
-        fgets(peserta->npsn, sizeof(peserta->npsn), stdin);
-        peserta->npsn[strcspn(peserta->npsn, "\n")] = 0;
-
-        printf("  6. Nama Sekolah                 : ");
-        fgets(peserta->namaSekolah, sizeof(peserta->namaSekolah), stdin);
-        peserta->namaSekolah[strcspn(peserta->namaSekolah, "\n")] = 0;
-
-        printf("\n  >>> Peserta ORANG TUA/WALI <<<\n");
-        printf("  7. Nama Ayah                    : ");
-        fgets(peserta->namaAyah, sizeof(peserta->namaAyah), stdin);
-        peserta->namaAyah[strcspn(peserta->namaAyah, "\n")] = 0;
-
-        printf("  8. Nama Ibu                     : ");
-        fgets(peserta->namaIbu, sizeof(peserta->namaIbu), stdin);
-        peserta->namaIbu[strcspn(peserta->namaIbu, "\n")] = 0;
-
-        printf("  9. Jml.Tanggungan               : ");
-        fgets(peserta->jumlahTanggungan, sizeof(peserta->jumlahTanggungan), stdin);
-        peserta->jumlahTanggungan[strcspn(peserta->jumlahTanggungan, "\n")] = 0;
-
-        printf(" 10. Gaji Ayah (per bulan)        : ");
-        fgets(peserta->gajiAyah, sizeof(peserta->gajiAyah), stdin);
-        peserta->gajiAyah[strcspn(peserta->gajiAyah, "\n")] = 0;
-
-        printf(" 11. Gaji Ibu (per bulan)         : ");
-        fgets(peserta->gajiIbu, sizeof(peserta->gajiIbu), stdin);
-        peserta->gajiIbu[strcspn(peserta->gajiIbu, "\n")] = 0;
-
-        system("cls");
-   printf("===================================================\n");
-   printf("     PROGRAM PENDAFTARAN UTBK - Ringkasan Peserta     \n");
-   printf("===================================================\n\n");
-   printf("  >>> Peserta DIRI CALON PESERTA <<<\n");
-   printf("  Nama Lengkap    : %s\n", peserta->namaLengkap);
-   printf("  Tempat Lahir    : %s\n", peserta->tempatLahir);
-   printf("  Tanggal Lahir   : %s\n", peserta->tanggalLahir);
-   printf("  NISN            : %s\n", peserta->nisn);
-   printf("  NPSN            : %s\n", peserta->npsn);
-   printf("  Nama Sekolah    : %s\n", peserta->namaSekolah);
-   printf("\n  >>> Peserta ORANG TUA/WALI <<<\n");
-   printf("  Nama Ayah       : %s\n", peserta->namaAyah);
-   printf("  Nama Ibu        : %s\n", peserta->namaIbu);
-   printf("  Jumlah Tanggungan wali : %s\n", peserta->jumlahTanggungan);
-   printf("  Gaji Ayah       : %s\n", peserta->gajiAyah);
-   printf("  Gaji Ibu        : %s\n", peserta->gajiIbu);
-   printf("\n===================================================\n");
-   printf("  Opsi:\n");
-   printf("  0-> Kembali (Ubah Peserta)\n");
-   printf("  1-> Batalkan Pendaftaran\n");
-   printf("  2-> Simpan dan Lanjutkan ( program studi)\n");
-   printf("===================================================\n");
-        printf("  Pilih opsi: ");
-        scanf("%d", &choice);
-        while (getchar() != '\n');
-
-        if (choice == 2) {
-            printf("\nPeserta berhasil disimpan dan akan dilanjutkan ke pemilihan program studi!\n");
-            printf("Tekan Enter untuk melanjutkan ke halaman selanjutnya->\n");
-            getchar();
+        if (jumlahProdi >= 4) {
+            printf("\nSudah memilih maksimal 4 prodi.\n");
             break;
-        } else if (choice == 1) {
-            printf("\nPendaftaran dibatalkan-> Terima kasih!\n");
-        } else if (choice == 0) {
-            printf("\nKembali untuk mengubah peserta->->->\n");
-            printf("Tekan Enter untuk melanjutkan->\n");
-            getchar();
+        }
+        printf("\n=== Pemilihan Prodi ke-%d ===\n", i);
+        printf("Masukkan nama Universitas: ");
+        fgets(input.universitas, sizeof(input.universitas), stdin);
+        input.universitas[strcspn(input.universitas, "\n")] = '\0';
+
+        printf("Masukkan nama Program Studi: ");
+        fgets(input.prodi, sizeof(input.prodi), stdin);
+        input.prodi[strcspn(input.prodi, "\n")] = '\0';
+
+        printf("\nPilihan:\n");
+        printf("1. Batal (hapus prodi terakhir)\n");
+        printf("2. Simpan dan Tambah Prodi\n");
+        printf("3. Simpan dan Lanjutkan (ke tahap selanjutnya)\n");
+        printf("Masukkan pilihan (1/2/3): ");
+        scanf(" %c", &pilihan);
+        getchar();  // Bersihkan newline
+
+        if (pilihan == '1') {
+            Prodi removed;
+            if (jumlahProdi == 0) {
+                printf("Belum ada prodi yang dipilih.\n");
+            } else {
+                Pop(stack, &removed);
+                printf("Berhasil Menghapus Prodi");
+                printStack(*stack);
+                i--;
+                jumlahProdi--;
+            }
+        } else if (pilihan == '2') {
+            Push(stack, input);
+            printStack(*stack);
+            i++;
+            jumlahProdi++;
+        } else if (pilihan == '3') {
+            Push(stack, input);
+            printStack(*stack);
+            printf("Berhasil Memilih Prodi");
+            break;
         } else {
-            printf("\nPilihan tidak valid! Tekan Enter untuk coba lagi->\n");
-            getchar();
-            choice = 0;
+            printf("Pilihan tidak valid.\n");
         }
 
-    } while (choice == 0);
-
-    printf("\n[Implementasi untuk 'Memilih program studi' akan Pesertang di sini->]\n");
-    printf("Terima kasih telah menggunakan program pendaftaran UTBK->\n");
-    printf("Tekan Enter untuk keluar->\n");
-    getchar();
-
+    } while (1);
 }
 
-void addPeserta(Peserta* peserta,User* user){
-FILE* file;
-file = fopen("BasisDataBiodata.txt","a");
-fprintf(file,"%s,%s\n",user->email,user->password);
-fprintf(file, "Nama Lengkap    : %s\n", peserta->namaLengkap);
-fprintf(file, "Tempat Lahir    : %s\n", peserta->tempatLahir);
-fprintf(file, "Tanggal Lahir   : %s\n", peserta->tanggalLahir);
-fprintf(file, "NISN            : %s\n", peserta->nisn);
-fprintf(file, "NPSN            : %s\n", peserta->npsn);
-fprintf(file, "Nama Sekolah    : %s\n", peserta->namaSekolah);
-fprintf(file, "Nama Ayah       : %s\n", peserta->namaAyah);
-fprintf(file, "Nama Ibu        : %s\n", peserta->namaIbu);
-fprintf(file, "Jumlah Tanggungan : %s\n",peserta->jumlahTanggungan);
-fprintf(file, "Gaji Ayah       : %s\n", peserta->gajiAyah);
-fprintf(file, "Gaji Ibu        : %s\n", peserta->gajiIbu);
-fclose(file);
+void printStack(Stack S) {
+    address p = First(S.Top);
+    int i = 1;
+    if (p == NULL) {
+        printf("Belum ada prodi yang dipilih.\n");
+        return;
+    }
+    printf("\n\n=================================\n");
+    printf("     Daftar Pilihan Prodi\n");
+    printf("=================================\n");
+    while (p != NULL) {
+        printf("%d. Universitas: %s | Prodi: %s\n", i, p->info.universitas, p->info.prodi);
+        p = p->next;
+        i++;
+    }
+}
+
+void pilihProdi(Stack* S,Prodi P){
+    Push(S, P);  
+    printf("\nProdi berhasil ditambahkan.\n");
+    printf("=== Daftar Prodi Saat Ini ===\n");
+    printStack(*S);
+}
+
+void hapusProdi(Stack* S){
+    if (!IsEmpty(*S)) {
+        Prodi removed;
+        Pop(S, &removed);
+        printf("\nProdi terakhir telah dihapus:\n");
+        printf("Universitas: %s | Prodi: %s\n", removed.universitas, removed.prodi);
+    } else {
+        printf("\nStack kosong. Tidak ada prodi yang bisa dihapus.\n");
+    }
+
+    printf("\n=== Daftar Prodi Saat Ini ===\n");
+    printStack(*S);
 }

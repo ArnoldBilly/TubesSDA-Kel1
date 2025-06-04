@@ -8,6 +8,7 @@
 #include "BOOLEAN.H"
 #include "SpNRSLL.H"
 
+
 /* Null adalah stack dengan elemen kosong. */
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP bertype address (Head)*/
 
