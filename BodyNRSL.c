@@ -129,45 +129,45 @@ void DeAlokasi (address P)
 
 /**** PRIMITIF BERDASARKAN NILAI ****/
 /**** Penambahan Elemen ****/
-//void InsVFirst (List * L, infotype X)
+void InsVFirst (List * L, infotype X)
 /* IS : L mungkin Kosong */
 /* FS : melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-//{
+{
 	 /* Kamus Lokal */
-	//address P;
+	address P;
 	 /* Algoritma */
-	//P =(Alokasi(X));
-	//if (P !=Nil){
-	//	Next(P)=First(*L);  
-	//	First(*L)=P;
-	//}
-//}
+	P =(Alokasi(X));
+	if (P !=Nil){
+		Next(P)=First(*L);  
+		First(*L)=P;
+	}
+}
 
-void  InsVLast (List * L, infotype X)
+//void  InsVLast (List * L, infotype X)
 /* IS : L mungkin Kosong */
 /* FS : melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir (elemen terakhir adalah yang baru) */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal IS = FS */
-{
+//{
 	 /* Kamus Lokal */
-	address P, last;
+	//address P, last;
 	
 	 /* Algoritma */
-	 P =(Alokasi(X));
-	 if (P != Nil) {
-        if (ListEmpty(*L)) {
-            First(*L) = P;
-        } else {
-            last = First(*L);
-            while (Next(last) != Nil) {
-                last = Next(last);
-            }
-            Next(last) = P;
-        }
-    }
+	 //P =(Alokasi(X));
+	 //if (P != Nil) {
+     //   if (ListEmpty(*L)) {
+       //     First(*L) = P;
+        //} else {
+          //  last = First(*L);
+            //while (Next(last) != Nil) {
+              //  last = Next(last);
+            //}
+            //Next(last) = P;
+        //}
+    //}
 	 
-}
+//}
 
 /**** Penghapusan Elemen ****/
 void DelVFirst (List * L, infotype * X)
@@ -241,27 +241,6 @@ void DelFirst (List * L, address * P)
     }
 }
 
-void InsertLast (List * L, address P)
-/* IS : L sembarang, P sudah dialokasi */
-/* FS : P ditambahkan sebagai elemen terakhir yang baru */
-{
-	 /* Kamus Lokal */
-	address Last;
-	 /* Algoritma */
-	 
-	 if (P != Nil) {
-        if (ListEmpty(*L)) {
-            First(*L) = P;
-        } else {
-            Last = First(*L);
-            while (Next(Last) != Nil) {
-                Last = Next(Last);
-            }
-            Next(Last) = P;
-        }
-    }
-}
-
 /**** PROSES SEMUA ELEMEN LIST  ****/
 void PrintInfo (List L)
 /* IS : L mungkin kosong */
@@ -283,4 +262,17 @@ void PrintInfo (List L)
 }
 
 
-
+void InsertLast(List* L, address P) {
+    address Last;
+    if (P != Nil) {
+        if (ListEmpty(*L)) {
+            First(*L) = P;
+        } else {
+            Last = First(*L);
+            while (Next(Last) != Nil) {
+                Last = Next(Last);
+            }
+            Next(Last) = P;
+        }
+    }
+}
