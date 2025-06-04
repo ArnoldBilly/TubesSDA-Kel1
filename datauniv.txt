@@ -1,0 +1,48 @@
+#JAWA
+Institut Teknologi Bandung|150|145
+-Universitas Pendidikan Indonesia|150|145
+--Institut Pertanian Bogor|150|145
+---Universitas Negeri Jakarta|150|145
+----Universitas Sultan Ageng Tirtayasa|150|145
+--Universitas Indonesia|150|145
+---Universitas Pembangunan Nasional Veteran Jakarta|150|145
+-Universitas Padjajaran|150|145
+-Universitas Jenderal Soedirman|150|145
+--Universitas Diponegoro|150|145
+--Universitas Sebelas Maret|150|145
+--Universitas Gadjah Mada|150|145
+---Universitas Negeri Yogyakarta|150|145
+----Universitas Brawijaya|150|145
+----Institut Teknologi Sepuluh November|150|145
+----Universitas Airlangga|150|145
+#SUMATERA
+Institut Teknologi Sumatera|150|145
+-Universitas Negeri Lampung|150|145
+-Universitas Sriwijaya|150|145
+--Universitas Islam Negeri Raden Fatah|150|145
+--Universitas Jambi|150|145
+---Universitas Andalas|150|145
+----Universitas Sumatera Utara|150|145
+----Universitas Negeri Medan|150|145
+----Universitas Syiah Kuala|150|145
+---Universitas Negeri Padang|150|145
+#KALIMANTAN
+Universitas Lambung Mangkurat|150|145
+-Universitas Tanjung Pura|150|145
+-Institut Teknologi Kalimantan|150|145
+--Universitas Mulawarman|150|145
+--Universitas Kalimantan Utara|150|145
+-Universitas Palangkaraya|150|145
+#SULAWESI
+Universitas Tadulako|150|146
+-Universitas Sulawesi Barat|150|145
+--Universitas Negeri Makassar|150|145
+--Universitas Islam Negeri Alauddin|150|145
+-Universitas Negeri Gorontalo|150|145
+--Universitas Sam Ratulangi|150|145
+--Universitas Negeri Manado|150|145
+#PAPUA
+Politeknik Negeri Fak-Fak|150|145
+-Universitas Papua|150|146
+-Universitas Jayapura|150|145
+-Politeknik Amamapare|150|145
