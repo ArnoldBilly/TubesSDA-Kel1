@@ -1,7 +1,7 @@
 #ifndef FARELL_H
 #define FARELL_H
 
-#include "queue_.h"
+#include "queue.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -29,8 +29,6 @@ typedef struct dataPeserta {
 } dataPeserta;
 
 // Deklarasi fungsi
-void displayMenuUtama();
-void displayMenuAdmin();
 void tambahAkun(User** head, const char* email, const char* password);
 void simpanAkunKeFile(User* head);
 void bacaAkunDariFile(User** head);
@@ -39,7 +37,7 @@ int loginAkun(User* head, char* email, char* password);
 void isiBiodata(dataPeserta** pesertaHead, char* nisn);
 void tambahPeserta(dataPeserta** head, dataPeserta* peserta);
 dataPeserta* cariPeserta(dataPeserta* head, char* nisn);
-void enqueuePeserta(Queue* Q, char* nisn, dataPeserta* pesertaHead);
+void enqueuePeserta(Queue* Q, const char* nisn, dataPeserta* pesertaHead);
 dataPeserta* dequeuePeserta(Queue* Q, dataPeserta* pesertaHead);
 void lihatAntrian(Queue Q, dataPeserta* pesertaHead);
 void konfirmasiAntrian(Queue* Q, dataPeserta* pesertaHead);
