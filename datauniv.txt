@@ -1,5 +1,5 @@
 #JAWA
-Institut Teknologi Bandung|65|107
+Institut Teknologi Bandung|68|107
 -Universitas Pendidikan Indonesia|25|101
 --Institut Pertanian Bogor|67|121
 ---Universitas Indonesia|6|106

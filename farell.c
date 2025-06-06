@@ -5,7 +5,6 @@ void menuUtama(User** akunHead, Queue* antrean, dataPeserta** pesertaHead) {
     int pilihan;
     char email[MAX_EMAIL], password[MAX_PASSWORD];
 
-    while (1) {
         printf("Raih masa depanmu di portal SNBT\n");
         printf("Belum memiliki akun SNBT?\n");
         printf("1. Registrasi\n");
@@ -25,7 +24,6 @@ void menuUtama(User** akunHead, Queue* antrean, dataPeserta** pesertaHead) {
             default:
                 printf("Pilihan tidak valid!\n");
         }
-    }
 }
 
 void tambahAkun(User** head, const char* email, const char* password) {
@@ -227,7 +225,8 @@ void prosesLogin(User* akunHead, Queue* antrean, dataPeserta** pesertaHead) {
         if (strcmp(email, "admin@admin.com") == 0) {
             menuAdmin(antrean, *pesertaHead);
         } else {
-            printf("Login Berhasil sebagai user.\n");
+            printf("Login Berhasil. Selamat datang!.\n");
+
             return;
         }
     } else {

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "farell.h"
 #include "STACK.H"
 #include "SpNRSLL.H"
 
@@ -21,10 +22,10 @@ typedef struct Peserta {
     char gajiIbu[50];        
 } Peserta;
 
-typedef struct User{
-char email[7] ;
-char password[11] ;
-}User;
+// typedef struct User{
+// char email[7] ;
+// char password[11] ;
+// }User;
 
 void displayBioPeserta(Peserta* Peserta);
 void addPeserta(Peserta* peserta,User* user);
