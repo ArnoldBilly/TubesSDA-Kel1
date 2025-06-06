@@ -237,8 +237,9 @@ void rekomendasiAlternatif(Address root, const char* target) {
     int adaRekomendasi = 0;
 
     // Cek Parent //
-    if (targetUniv->parent != NULL && targetUniv->parent->jumlahPeserta < targetUniv->parent->kapasitas) {
-        printf("- %s\n", targetUniv->parent->namaUniv);
+    Address parent = targetUniv->parent;
+    if (parent != NULL && parent->jumlahPeserta < parent->kapasitas) {
+        printf("- %s\n", parent->namaUniv);
         adaRekomendasi = 1;
     }
 

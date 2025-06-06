@@ -1,5 +1,5 @@
 #JAWA
-Institut Teknologi Bandung|64|107
+Institut Teknologi Bandung|65|107
 -Universitas Pendidikan Indonesia|25|101
 --Institut Pertanian Bogor|67|121
 ---Universitas Indonesia|6|106
@@ -14,7 +14,7 @@ Institut Teknologi Bandung|64|107
 ---Universitas Negeri Yogyakarta|97|101
 ----Universitas Brawijaya|9|114
 ----Institut Teknologi Sepuluh November|123|133
-----Universitas Airlangga|39|119
+----Universitas Airlangga|43|119
 #SUMATERA
 Institut Teknologi Sumatera|56|125
 -Universitas Negeri Lampung|34|116
