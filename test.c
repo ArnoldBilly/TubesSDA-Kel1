@@ -33,7 +33,7 @@ void addChild(Address parent, Address child) {
 void simpanTreeKeFile(Address root, FILE *f, int level) {
     if (root) {
         for (int i = 0; i < level; i++) fprintf(f, "-");
-        fprintf(f, "%s|%d|%d\n", root->namaUniv, root->kapasitas, root->jumlahPeserta);
+        fprintf(f, "%s|%d|%d\n", root->namaUniv, root->jumlahPeserta, root->kapasitas);
         simpanTreeKeFile(root->firstChild, f, level + 1);
         simpanTreeKeFile(root->nextSibling, f, level);
     }
@@ -52,8 +52,8 @@ Address bacaTreeDariFile(FILE *f) {
 
         char *content = line + level;
         char *nama = strtok(content, "|");
-        int kapasitas = atoi(strtok(NULL, "|"));
         int peserta = atoi(strtok(NULL, "|"));
+        int kapasitas = atoi(strtok(NULL, "|"));
 
         Address node = (Address)malloc(sizeof(TreeNode));
         strcpy(node->namaUniv, nama);
@@ -79,7 +79,18 @@ Address bacaTreeDariFile(FILE *f) {
 
 void loadAtauInit(Address *j, Address *s, Address *k, Address *u, Address *p) {
     FILE *f = fopen("datauniv.txt", "r");
-    if (f) {
+
+    if (f != NULL) {
+        int c = fgetc(f);
+        if (c == EOF) {
+            fclose(f);
+            f = NULL;
+        } else {
+            ungetc(c, f);
+        }
+    }
+
+    if (f != NULL) {
         char line[MAX_LINE];
         Address stack[100];
         int levelStack[100];
@@ -116,13 +127,13 @@ void loadAtauInit(Address *j, Address *s, Address *k, Address *u, Address *p) {
 
                 char *content = line + level;
                 char *nama = strtok(content, "|");
-                int kapasitas = atoi(strtok(NULL, "|"));
                 int peserta = atoi(strtok(NULL, "|"));
+                int kapasitas = atoi(strtok(NULL, "|"));
 
                 Address node = (Address)malloc(sizeof(TreeNode));
                 strcpy(node->namaUniv, nama);
-                node->kapasitas = kapasitas;
                 node->jumlahPeserta = peserta;
+                node->kapasitas = kapasitas;
                 node->firstChild = node->nextSibling = node->prevSibling = node->parent = NULL;
 
                 if (level == 0) {
@@ -159,10 +170,16 @@ void loadAtauInit(Address *j, Address *s, Address *k, Address *u, Address *p) {
         *k = initTreeKalimantan();
         *u = initTreeSulawesi();
         *p = initTreePapua();
+
+        f = fopen("datauniv.txt", "w");
+        fprintf(f, "#JAWA\n"); simpanTreeKeFile(*j, f, 0);
+        fprintf(f, "#SUMATERA\n"); simpanTreeKeFile(*s, f, 0);
+        fprintf(f, "#KALIMANTAN\n"); simpanTreeKeFile(*k, f, 0);
+        fprintf(f, "#SULAWESI\n"); simpanTreeKeFile(*u, f, 0);
+        fprintf(f, "#PAPUA\n"); simpanTreeKeFile(*p, f, 0);
+        fclose(f);
     }
 }
-
-
 
 void printTree(Address root, int level) {
     if (root != NULL) {
@@ -278,22 +295,22 @@ Address initTreeJawa() {
     Address ub = newNode("Universitas Brawijaya");
     Address its = newNode("Institut Teknologi Sepuluh November");
     Address unair = newNode("Universitas Airlangga");
-    addChild(unsoed, unpad);
-    addChild(unsoed, undip);
-    addChild(unpad, itb);
-    addChild(unpad, upi);
+    addChild(itb, upi);
+    addChild(itb, unpad);
+    addChild(itb, unsoed);
     addChild(upi, ipb);
-    addChild(upi, ui);
+    addChild(ipb, ui);
+    addChild(ipb, unj);
     addChild(ui, upnvj);
-    addChild(ui, unj);
     addChild(unj, untirta);
-    addChild(undip, uns);
-    addChild(undip, ugm);
-    addChild(undip, uny);
+    addChild(unsoed, undip);
+    addChild(unsoed, uns);
+    addChild(unsoed, ugm);
+    addChild(ugm, uny);
     addChild(uny, ub);
     addChild(uny, its);
     addChild(uny, unair);
-    return unsoed;
+    return itb;
 }
 
 Address initTreeSumatera() {

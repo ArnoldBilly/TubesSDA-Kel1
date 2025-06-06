@@ -1,48 +1,48 @@
 #JAWA
-Institut Teknologi Bandung|150|145
--Universitas Pendidikan Indonesia|150|145
---Institut Pertanian Bogor|150|145
----Universitas Negeri Jakarta|150|145
-----Universitas Sultan Ageng Tirtayasa|150|145
---Universitas Indonesia|150|145
----Universitas Pembangunan Nasional Veteran Jakarta|150|145
--Universitas Padjajaran|150|145
--Universitas Jenderal Soedirman|150|145
---Universitas Diponegoro|150|145
---Universitas Sebelas Maret|150|145
---Universitas Gadjah Mada|150|145
----Universitas Negeri Yogyakarta|150|145
-----Universitas Brawijaya|150|145
-----Institut Teknologi Sepuluh November|150|145
-----Universitas Airlangga|150|145
+Institut Teknologi Bandung|64|107
+-Universitas Pendidikan Indonesia|25|101
+--Institut Pertanian Bogor|67|121
+---Universitas Indonesia|6|106
+----Universitas Pembangunan Nasional Veteran Jakarta|108|140
+---Universitas Negeri Jakarta|69|124
+----Universitas Sultan Ageng Tirtayasa|87|109
+-Universitas Padjajaran|128|128
+-Universitas Jenderal Soedirman|99|128
+--Universitas Diponegoro|94|139
+--Universitas Sebelas Maret|30|113
+--Universitas Gadjah Mada|60|134
+---Universitas Negeri Yogyakarta|97|101
+----Universitas Brawijaya|9|114
+----Institut Teknologi Sepuluh November|123|133
+----Universitas Airlangga|39|119
 #SUMATERA
-Institut Teknologi Sumatera|150|145
--Universitas Negeri Lampung|150|145
--Universitas Sriwijaya|150|145
---Universitas Islam Negeri Raden Fatah|150|145
---Universitas Jambi|150|145
----Universitas Andalas|150|145
-----Universitas Sumatera Utara|150|145
-----Universitas Negeri Medan|150|145
-----Universitas Syiah Kuala|150|145
----Universitas Negeri Padang|150|145
+Institut Teknologi Sumatera|56|125
+-Universitas Negeri Lampung|34|116
+-Universitas Sriwijaya|43|101
+--Universitas Islam Negeri Raden Fatah|24|127
+--Universitas Jambi|98|128
+---Universitas Negeri Andalas|33|138
+----Universitas Sumatera Utara|112|135
+----Universitas Negeri Medan|30|120
+----Universitas Syiah Kuala|49|105
+---Universitas Negeri Padang|76|122
 #KALIMANTAN
-Universitas Lambung Mangkurat|150|145
--Universitas Tanjung Pura|150|145
--Institut Teknologi Kalimantan|150|145
---Universitas Mulawarman|150|145
---Universitas Kalimantan Utara|150|145
--Universitas Palangkaraya|150|145
+Universitas Lambung Mangkurat|0|132
+-Universitas Tanjung Pura|117|132
+-Universitas Palangkaraya|25|139
+-Institut Teknologi Kalimantan|125|140
+--Universitas Mulawarman|5|126
+--Universitas Kalimantan Utara|113|116
 #SULAWESI
-Universitas Tadulako|150|146
--Universitas Sulawesi Barat|150|145
---Universitas Negeri Makassar|150|145
---Universitas Islam Negeri Alauddin|150|145
--Universitas Negeri Gorontalo|150|145
---Universitas Sam Ratulangi|150|145
---Universitas Negeri Manado|150|145
+Universitas Tadulako|104|116
+-Universitas Sulawesi Barat|11|148
+--Universitas Negeri Makassar|92|145
+--Universitas Islam Negeri Makassar|10|141
+-Universitas Negeri Gorontalo|16|135
+--Universitas Sam Ratulangi|1|105
+--Universitas Negeri Manado|48|102
 #PAPUA
-Politeknik Negeri Fak-Fak|150|145
--Universitas Papua|150|146
--Universitas Jayapura|150|145
--Politeknik Amamapare|150|145
+Politeknik Negeri Fak-Fak|53|114
+-Universitas Papua|104|107
+-Universitas Jayapura|50|137
+-Politeknik Amamapare|108|122
