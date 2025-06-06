@@ -29,6 +29,8 @@ typedef struct dataPeserta {
 } dataPeserta;
 
 // Deklarasi fungsi
+void displayMenuUtama();
+void displayMenuAdmin();
 void tambahAkun(User** head, const char* email, const char* password);
 void simpanAkunKeFile(User* head);
 void bacaAkunDariFile(User** head);
