@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "spnrsll.h": "c"
+        "*.embeddedhtml": "html",
+        "spnrsll.h": "c",
+        "SpNRSLL.H": "cpp"
     }
 }
