@@ -14,12 +14,18 @@
 #define Next(P) (P)->next
 #define First(L) (L).First
 
-typedef int infotype;
+typedef struct Prodi {
+    char universitas[30];
+    char prodi[30];
+} Prodi;
+
+typedef Prodi infotype;
+
 typedef struct tElmtList *address;
 typedef struct tElmtList {
 	 infotype info;
 	 address  next;
-	 } ElmtList;
+} ElmtList;
 
 /* Definisi list : */
 /* List kosong ===> First(L) = Nil */
@@ -82,6 +88,7 @@ void InsVLast (List * L, infotype X);
 /* FS : melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir (elemen terakhir adalah yang baru) */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal IS = FS */
+void InsVFirst(List *L, infotype X);
 
 /**** Penghapusan Elemen ****/
 void DelVFirst (List * L, infotype * X);
