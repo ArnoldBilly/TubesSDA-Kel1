@@ -1,6 +1,33 @@
 #include "farell.h"
 
 
+void menuUtama(User** akunHead, Queue* antrean, dataPeserta** pesertaHead) {
+    int pilihan;
+    char email[MAX_EMAIL], password[MAX_PASSWORD];
+
+    while (1) {
+        printf("Raih masa depanmu di portal SNBT\n");
+        printf("Belum memiliki akun SNBT?\n");
+        printf("1. Registrasi\n");
+        printf("Sudah memiliki akun SNBT?\n");
+        printf("2. Login\n");
+        printf("Masukkan pilihan: ");
+        scanf("%d", &pilihan);
+        getchar();
+
+        switch (pilihan) {
+            case 1:
+                registrasiAkun(akunHead);
+                break;
+            case 2:
+                prosesLogin(*akunHead, antrean, pesertaHead);
+                break;
+            default:
+                printf("Pilihan tidak valid!\n");
+        }
+    }
+}
+
 void tambahAkun(User** head, const char* email, const char* password) {
     User* newUser = (User*)malloc(sizeof(User));
     strcpy(newUser->email, email);
@@ -183,5 +210,42 @@ void konfirmasiAntrian(Queue* Q, dataPeserta* pesertaHead) {
     if (peserta != NULL) {
         strcpy(peserta->status, "Dikonfirmasi");
         printf("Pendaftar dengan NISN %s dikonfirmasi!\n", peserta->nisn);
+    }
+}
+
+void prosesLogin(User* akunHead, Queue* antrean, dataPeserta** pesertaHead) {
+    char email[MAX_EMAIL], password[MAX_PASSWORD];
+    printf("Login Akun SNBT\n");
+    printf("Masukkan email: ");
+    fgets(email, MAX_EMAIL, stdin);
+    email[strcspn(email, "\n")] = 0;
+    printf("Masukkan Password: ");
+    fgets(password, MAX_PASSWORD, stdin);
+    password[strcspn(password, "\n")] = 0;
+
+    if (loginAkun(akunHead, email, password)) {
+        if (strcmp(email, "admin@admin.com") == 0) {
+            menuAdmin(antrean, *pesertaHead);
+        } else {
+            printf("Login Berhasil sebagai user.\n");
+            return;
+        }
+    } else {
+        printf("Login gagal! Email atau password salah.\n");
+    }
+}
+
+void menuAdmin(Queue* antrean, dataPeserta* pesertaHead) {
+    int pilihan;
+    while (1) {
+        printf("Selamat Datang Admin\n");
+        printf("1. Lihat Antrian\n2. Konfirmasi Antrian\n3. Keluar\n");
+        printf("Masukkan pilihan: ");
+        scanf("%d", &pilihan);
+        getchar();
+        if (pilihan == 1) lihatAntrian(*antrean, pesertaHead);
+        else if (pilihan == 2) konfirmasiAntrian(antrean, pesertaHead);
+        else if (pilihan == 3) break;
+        else printf("Pilihan tidak valid!\n");
     }
 }

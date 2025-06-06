@@ -20,7 +20,6 @@ typedef struct User {
     struct User* next;
 } User;
 
-// Struktur data Peserta
 typedef struct dataPeserta {
     char nisn[MAX_NISN];
     char nama[MAX_NAMA];
@@ -28,7 +27,9 @@ typedef struct dataPeserta {
     struct dataPeserta* next;
 } dataPeserta;
 
-// Deklarasi fungsi
+void menuUtama(User** akunHead, Queue* antrean, dataPeserta** pesertaHead);
+void prosesLogin(User* akunHead, Queue* antrean, dataPeserta** pesertaHead);
+void menuAdmin(Queue* antrean, dataPeserta* pesertaHead);
 void tambahAkun(User** head, const char* email, const char* password);
 void simpanAkunKeFile(User* head);
 void bacaAkunDariFile(User** head);
