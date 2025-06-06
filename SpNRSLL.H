@@ -15,7 +15,7 @@
 #define First(L) (L).First
 
 typedef struct Prodi {
-    char universitas[20];
+    char universitas[30];
     char prodi[30];
 } Prodi;
 
