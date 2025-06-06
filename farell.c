@@ -1,6 +1,15 @@
 #include "farell.h"
 
-// Fungsi pendukung untuk User (tidak diubah)
+void tampilkanMenuUtama() {
+    printf("\n=== Portal SNBT ===\n");
+    printf("Raih masa depanmu di portal SNBT\n");
+    printf("Belum memiliki akun SNBT?\n");
+    printf("1. Registrasi\n");
+    printf("Sudah memiliki akun SNBT?\n");
+    printf("2. Login\n");
+    printf("Masukkan pilihan: ");
+}
+
 void tambahAkun(User** head, const char* email, const char* password) {
     User* newUser = (User*)malloc(sizeof(User));
     strcpy(newUser->email, email);
@@ -106,6 +115,15 @@ void tambahPeserta(dataPeserta** head, dataPeserta* peserta) {
         }
         current->next = peserta;
     }
+}
+
+void tampilkanMenuAdmin() {
+    printf("\n=== Menu Admin ===\n");
+    printf("Selamat Datang Admin\n");
+    printf("1. Lihat Antrian\n");
+    printf("2. Konfirmasi Antrian\n");
+    printf("3. Keluar\n");
+    printf("Masukkan pilihan: ");
 }
 
 dataPeserta* cariPeserta(dataPeserta* head, char* nisn) {
