@@ -1,5 +1,6 @@
 #include "farell.h"
 
+
 void tampilkanMenuUtama() {
     printf("\n=== Portal SNBT ===\n");
     printf("Raih masa depanmu di portal SNBT\n");
@@ -117,15 +118,6 @@ void tambahPeserta(dataPeserta** head, dataPeserta* peserta) {
     }
 }
 
-void tampilkanMenuAdmin() {
-    printf("\n=== Menu Admin ===\n");
-    printf("Selamat Datang Admin\n");
-    printf("1. Lihat Antrian\n");
-    printf("2. Konfirmasi Antrian\n");
-    printf("3. Keluar\n");
-    printf("Masukkan pilihan: ");
-}
-
 dataPeserta* cariPeserta(dataPeserta* head, char* nisn) {
     dataPeserta* current = head;
     while (current != NULL) {
@@ -137,18 +129,19 @@ dataPeserta* cariPeserta(dataPeserta* head, char* nisn) {
     return NULL;
 }
 
-void enqueuePeserta(Queue* Q, char* nisn, dataPeserta* pesertaHead) {
-    int id = 0;
-    char nisnTruncated[5] = {0};
-    for (int i = 0; i < 4 && nisn[i] != '\0'; i++) {
-        nisnTruncated[i] = nisn[i];
-        if (nisn[i] >= '0' && nisn[i] <= '9') {
-            id = id * 10 + (nisn[i] - '0');
-        }
+void enqueuePeserta(Queue* Q, const char* nisn, dataPeserta* pesertaHead) {
+    dataPeserta* peserta = cariPeserta(pesertaHead, (char*)nisn);
+    if (peserta == NULL) {
+        printf("Peserta dengan NISN %s tidak ditemukan!\n", nisn);
+        return;
     }
-    printf("Enqueuing ID: %d for NISN: %s\n", id, nisnTruncated);
-    EnQueue(Q, id);
+    int id = atoi(nisn);
+    printf("Enqueuing ID: %d for NISN: %s\n", id, nisn);
+    infotype dataToEnqueue;
+    strcpy(dataToEnqueue.prodi, nisn);
+    EnQueue(Q, dataToEnqueue);
 }
+
 
 dataPeserta* dequeuePeserta(Queue* Q, dataPeserta* pesertaHead) {
     infotype id;
