@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "farell.h"
 #include "STACK.H"
 #include "SpNRSLL.H"
 
@@ -21,6 +20,8 @@ typedef struct Peserta {
     char gajiAyah[50];        
     char gajiIbu[50];        
 } Peserta;
+
+typedef struct User User;
 
 // typedef struct User{
 // char email[7] ;

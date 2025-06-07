@@ -2,19 +2,19 @@
 Institut Teknologi Bandung|68|107
 -Universitas Pendidikan Indonesia|25|101
 --Institut Pertanian Bogor|67|121
----Universitas Indonesia|6|106
+---Universitas Indonesia|8|106
 ----Universitas Pembangunan Nasional Veteran Jakarta|108|140
 ---Universitas Negeri Jakarta|69|124
 ----Universitas Sultan Ageng Tirtayasa|87|109
 -Universitas Padjajaran|128|128
 -Universitas Jenderal Soedirman|99|128
---Universitas Diponegoro|94|139
+--Universitas Diponegoro|100|139
 --Universitas Sebelas Maret|30|113
 --Universitas Gadjah Mada|60|134
 ---Universitas Negeri Yogyakarta|97|101
-----Universitas Brawijaya|9|114
+----Universitas Brawijaya|11|114
 ----Institut Teknologi Sepuluh November|123|133
-----Universitas Airlangga|43|119
+----Universitas Airlangga|48|119
 #SUMATERA
 Institut Teknologi Sumatera|56|125
 -Universitas Negeri Lampung|34|116

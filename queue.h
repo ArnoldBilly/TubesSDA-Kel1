@@ -3,12 +3,11 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 #include "boolean.h"
-#define NBElement 10
 #include "SpNRSLL.H"
 
 typedef struct
 {
-    List L;
+    QueueList L;
 }Queue;
 
 
@@ -22,12 +21,13 @@ boolean is_Empty (Queue Q);
 boolean is_Full (Queue Q);
 
 /*Melekukan insertion pada queue*/
-void EnQueue (Queue *Q, infotype X);
+void EnQueue (Queue *Q, QueueInfo X);
 
 /*Melakukan deletion pada queue*/
-void deQueue (Queue *Q, infotype *X);
+void deQueue (Queue *Q, QueueInfo *X);
 
 void printQueue(Queue *Q);
+
 
 #endif
 

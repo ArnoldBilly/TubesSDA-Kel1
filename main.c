@@ -2,7 +2,6 @@
 #include "hanif.h"
 #include "test.h"
 
-
 int main() {
     srand(time(NULL));
     User* akunHead = NULL;
@@ -74,27 +73,20 @@ int main() {
                     }
                 } else {
                     // Ini user //
-                    char nisn[MAX_NISN];
-                    printf("Masukkan NISN: ");
-                    fgets(nisn, MAX_NISN, stdin);
-                    nisn[strcspn(nisn, "\n")] = 0;
-
-                    // Pr nya kayanya dari sini rel //
-                    dataPeserta* pesertaExist = cariPeserta(pesertaHead, nisn);
+                    strcpy(peserta.nisn, email);
+                    strcpy(peserta.namaLengkap, "");
+                    displayBioPeserta(&peserta);
+                    addPeserta(&peserta, &user);
+                    dataPeserta* pesertaExist = cariPeserta(pesertaHead, peserta.nisn);
                     if (pesertaExist == NULL) {
-                        isiBiodata(&pesertaHead, nisn);
-                        enqueuePeserta(&antrean, nisn, pesertaHead);
+                        isiBiodata(&pesertaHead, peserta.nisn, &peserta);
+                        enqueuePeserta(&antrean, peserta.nisn, pesertaHead,&peserta);
                         printf("Pendaftaran berhasil, menunggu konfirmasi admin.\n");
                     } else {
                         printf("NISN sudah terdaftar!\n");
                     }
-
-                    // Hanif mulai dari sini //
                     strcpy(user.email, email);
                     strcpy(user.password, password);
-                    printf("\n=== Masukkan Data Peserta ===\n");
-                    displayBioPeserta(&peserta);
-                    addPeserta(&peserta, &user);
                     printf("\n=== Lanjut ke Pemilihan Program Studi ===\n");
                     displayPemilihanProdi(&stack);
                     printf("\nPemilihan prodi selesai. Berikut pilihan Anda:\n");
@@ -159,6 +151,18 @@ int main() {
                     fprintf(f, "#SULAWESI\n"); simpanTreeKeFile(rootsulawesi, f, 0);
                     fprintf(f, "#PAPUA\n"); simpanTreeKeFile(rootpapua, f, 0);
                     fclose(f);
+                    
+                    printf("\nPendaftaran selesai. Apa yang ingin Anda lakukan?\n");
+                    printf("1. Logout\n2. Keluar dari program\n");
+                    printf("Masukkan pilihan: ");
+                    scanf("%d", &pilih);
+                    getchar();
+                    if (pilih == 1) {
+                        printf("Anda telah logout. Kembali ke menu utama...\n");
+                        continue;
+                    }else if (pilih == 2){
+                        break;
+                    }
                 }
             } else {
                 printf("Email atau password salah.\n");

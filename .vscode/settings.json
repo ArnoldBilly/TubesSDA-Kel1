@@ -2,6 +2,7 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "spnrsll.h": "c",
-        "SpNRSLL.H": "cpp"
+        "SpNRSLL.H": "cpp",
+        "stdio.h": "c"
     }
 }
