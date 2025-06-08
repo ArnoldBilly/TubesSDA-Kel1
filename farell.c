@@ -90,7 +90,7 @@ void registrasiAkun(User** head) {
 
     tambahAkun(head, email, password);
     simpanAkunKeFile(*head);
-    printf("Registrasi berhasil!\n");
+    printf("Registrasi berhasil!. Silahkan Login kembali!\n");
 }
 
 int loginAkun(User* head, char* email, char* password) {
@@ -308,7 +308,7 @@ void tampilkanKartuPeserta(Peserta* peserta, Stack* stackProdi, Address lokasiUj
         }
     }
 
-    printf("\nTempat Ujian    : %s\n", lokasiUjian ? lokasiUjian->namaUniv : "Belum ditentukan");
+    printf("\nLokasi Ujian    : %s\n", lokasiUjian ? lokasiUjian->namaUniv : "Belum ditentukan");
 
     printf("===================================================\n\n");
 }
