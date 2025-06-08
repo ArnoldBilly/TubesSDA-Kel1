@@ -89,7 +89,6 @@ int main() {
                         strcpy(peserta.nisn, email);
                         strcpy(peserta.namaLengkap, "");
                         displayBioPeserta(&peserta);
-                        addPeserta(&peserta, &user);
                         dataPeserta* pesertaExist = cariPeserta(pesertaHead, peserta.nisn);
                         if (pesertaExist == NULL) {
                             isiBiodata(&pesertaHead, peserta.nisn, &peserta);

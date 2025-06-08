@@ -29,7 +29,6 @@ typedef struct User User;
 // }User;
 
 void displayBioPeserta(Peserta* Peserta);
-void addPeserta(Peserta* peserta,User* user);
 void pilihProdi(Stack* S,Prodi prodi);
 void hapusProdi(Stack* S);
 void displayPemilihanProdi(Stack* stack);
