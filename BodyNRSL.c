@@ -3,7 +3,6 @@
 /* Dibuat oleh : Ade Chandra Nugraha */
 /* Tanggal     : 24-10-2001 */
 
-#include <limits.h>
 #include <malloc.h>
 #include "spnrsll.h"
 
@@ -274,5 +273,61 @@ void InsertLast(List* L, address P) {
             }
             Next(Last) = P;
         }
+    }
+}
+
+
+queueAddress QueueAlokasi(QueueInfo X) {
+    queueAddress P = (queueAddress)malloc(sizeof(QueueElmtlist));
+    if (P != NULL) {
+        P->info = X;
+        P->next = NULL;
+    }
+    return P;
+}
+
+void QueueDeAlokasi(queueAddress P) {
+    if (P != NULL) {
+        free(P);
+    }
+}
+
+void CreateQueueList(QueueList* L) {
+    L->First = NULL;
+}
+
+boolean QueueListEmpty(QueueList L) {
+    return (L.First == NULL);
+}
+
+void QueueInsVLast(QueueList* L, QueueInfo X) {
+    queueAddress P = QueueAlokasi(X);
+    if (P != NULL) {
+        if (L->First == NULL) {
+            L->First = P;
+        } else {
+            queueAddress Last = L->First;
+            while (Next(Last) != NULL) {
+                Last = Next(Last);
+            }
+            Next(Last) = P;
+        }
+    }
+}
+
+void QueueDelFirst(QueueList* L, QueueInfo* X) {
+    if (L->First != NULL) {
+        queueAddress P = L->First;
+        *X = P->info;
+        L->First = Next(P);
+        QueueDeAlokasi(P);
+    }
+}
+
+void QueuePrintInfo(QueueList L) {
+    queueAddress P = L.First;
+    while (P != NULL) {
+        printf("NISN: %s, Nama: %s\n", P->info.nisn, P->info.namaLengkap);
+        P = Next(P);
     }
 }

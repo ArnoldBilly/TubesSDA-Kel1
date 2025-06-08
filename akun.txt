@@ -1,4 +1,3 @@
-billy@gmail.com pas789
 peserta2@email.com pass456
 peserta1@gmail.com pass123
 admin@admin.com admin
