@@ -14,7 +14,7 @@ Institut Teknologi Bandung|68|107
 ---Universitas Negeri Yogyakarta|97|101
 ----Universitas Brawijaya|11|114
 ----Institut Teknologi Sepuluh November|123|133
-----Universitas Airlangga|48|119
+----Universitas Airlangga|56|119
 #SUMATERA
 Institut Teknologi Sumatera|56|125
 -Universitas Negeri Lampung|34|116
