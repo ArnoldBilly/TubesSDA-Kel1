@@ -39,44 +39,6 @@ void simpanTreeKeFile(Address root, FILE *f, int level) {
     }
 }
 
-Address bacaTreeDariFile(FILE *f) {
-    char line[MAX_LINE];
-    Address stack[100];
-    int levelStack[100];
-    int top = -1;
-    Address root = NULL;
-
-    while (fgets(line, sizeof(line), f)) {
-        int level = 0;
-        while (line[level] == '-') level++;
-
-        char *content = line + level;
-        char *nama = strtok(content, "|");
-        int peserta = atoi(strtok(NULL, "|"));
-        int kapasitas = atoi(strtok(NULL, "|"));
-
-        Address node = (Address)malloc(sizeof(TreeNode));
-        strcpy(node->namaUniv, nama);
-        node->kapasitas = kapasitas;
-        node->jumlahPeserta = peserta;
-        node->firstChild = node->nextSibling = node->prevSibling = node->parent = NULL;
-
-        if (level == 0) {
-            root = node;
-            top = 0;
-            stack[top] = node;
-            levelStack[top] = level;
-        } else {
-            while (top >= 0 && levelStack[top] >= level) top--;
-            if (top >= 0) addChild(stack[top], node);
-            top++;
-            stack[top] = node;
-            levelStack[top] = level;
-        }
-    }
-    return root;
-}
-
 void loadAtauInit(Address *j, Address *s, Address *k, Address *u, Address *p) {
     FILE *f = fopen("datauniv.txt", "r");
 

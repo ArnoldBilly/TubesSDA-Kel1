@@ -23,7 +23,6 @@ typedef struct TreeNode {
 Address newNode(const char* nama);
 void addChild(Address parent, Address child);
 void simpanTreeKeFile(Address root, FILE *f, int level);
-Address bacaTreeDariFile(FILE *f);
 void loadAtauInit(Address *j, Address *s, Address *k, Address *u, Address *p);
 void printTree(Address root, int level);
 void showTree(Address root, int level);

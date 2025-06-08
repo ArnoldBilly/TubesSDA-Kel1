@@ -8,7 +8,7 @@ Institut Teknologi Bandung|68|107
 ----Universitas Sultan Ageng Tirtayasa|87|109
 -Universitas Padjajaran|128|128
 -Universitas Jenderal Soedirman|99|128
---Universitas Diponegoro|100|139
+--Universitas Diponegoro|102|139
 --Universitas Sebelas Maret|30|113
 --Universitas Gadjah Mada|60|134
 ---Universitas Negeri Yogyakarta|97|101
