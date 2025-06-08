@@ -1,29 +1,29 @@
 /*File body untuk ADT Queue*/
 //Dibuat tanggal 28-3-2013
 
-#include "queue_.h"
+#include "queue.h"
 #include "SpNRSLL.H"
 #include "malloc.h"
 
 /*Membuat sebuah queue baru dengan Front dan Rear NULL*/
 void CreateQueue (Queue *Q)
 {
-    CreateList(&Q->L);
+    CreateQueueList(&Q->L);
 }
 
 
 /*Memeriksa apakah queue kosong */
 boolean is_Empty (Queue Q)
 {
-	 return ListEmpty(Q.L);
+	 return QueueListEmpty(Q.L);
 }
 
 /*Memeriksa apakah queue penuh */
 boolean is_Full (Queue Q)
 {
-    address p;
-	p = (address)malloc(sizeof(ElmtList));
+	queueAddress p = (queueAddress)malloc(sizeof(QueueElmtlist));
 	if (p== NULL){
+		free(p);
 		return true;
 	}
 	free(p);
@@ -31,25 +31,20 @@ boolean is_Full (Queue Q)
 }
 
 /*Melekukan insertion pada queue*/
-void EnQueue (Queue *Q, infotype X)
+void EnQueue (Queue *Q, QueueInfo X)
 {
-	address p;
-    p= Alokasi(X);
-    if (p!=Nil){
-        InsertLast(&Q->L, p);
-    }
-    
+	QueueInsVLast(&Q->L, X);
 }
+    
 
 /*Melakukan deletion pada queue*/
-void deQueue (Queue *Q, infotype *X)
-{	address p;
-	DelFirst(&Q->L,&p);
-	*X = Info(p);
-	DeAlokasi(p);
+void deQueue (Queue *Q, QueueInfo *X){	
+	if (!is_Empty(*Q)) {
+        QueueDelFirst(&Q->L, X);
+	}
 }
 
 void printQueue (Queue *Q)
 {
-	PrintInfo(Q->L);
+	QueuePrintInfo(Q->L);
 }

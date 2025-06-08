@@ -1,14 +1,30 @@
 #include "farell.h"
+#include "hanif.h"
 
 
-void tampilkanMenuUtama() {
-    printf("\n=== Portal SNBT ===\n");
-    printf("Raih masa depanmu di portal SNBT\n");
-    printf("Belum memiliki akun SNBT?\n");
-    printf("1. Registrasi\n");
-    printf("Sudah memiliki akun SNBT?\n");
-    printf("2. Login\n");
-    printf("Masukkan pilihan: ");
+void menuUtama(User** akunHead, Queue* antrean, dataPeserta** pesertaHead) {
+    int pilihan;
+    char email[MAX_EMAIL], password[MAX_PASSWORD];
+
+        printf("Raih masa depanmu di portal SNBT\n");
+        printf("Belum memiliki akun SNBT?\n");
+        printf("1. Registrasi\n");
+        printf("Sudah memiliki akun SNBT?\n");
+        printf("2. Login\n");
+        printf("Masukkan pilihan: ");
+        scanf("%d", &pilihan);
+        getchar();
+
+        switch (pilihan) {
+            case 1:
+                registrasiAkun(akunHead);
+                break;
+            case 2:
+                prosesLogin(*akunHead, antrean, pesertaHead);
+                break;
+            default:
+                printf("Pilihan tidak valid!\n");
+        }
 }
 
 void tambahAkun(User** head, const char* email, const char* password) {
@@ -90,20 +106,22 @@ int loginAkun(User* head, char* email, char* password) {
     return 0;
 }
 
-void isiBiodata(dataPeserta** pesertaHead, char* nisn) {
-    dataPeserta* peserta = (dataPeserta*)malloc(sizeof(dataPeserta));
-    char nisnTruncated[5] = {0};
-    for (int i = 0; i < 4 && nisn[i] != '\0'; i++) {
-        nisnTruncated[i] = nisn[i];
+void isiBiodata(dataPeserta** pesertaHead, char* nisn, Peserta* peserta) {
+    dataPeserta* existing = cariPeserta(*pesertaHead, nisn);
+    if (existing != NULL) {
+        printf("Peserta dengan NISN %s sudah terdaftar!\n", nisn);
+        return;
     }
-    strcpy(peserta->nisn, nisnTruncated);
-    printf("Pengisian Biodata\n");
-    printf("Nama: ");
-    fgets(peserta->nama, MAX_NAMA, stdin);
-    peserta->nama[strcspn(peserta->nama, "\n")] = 0;
-    strcpy(peserta->status, "Menunggu");
-    peserta->next = NULL;
-    tambahPeserta(pesertaHead, peserta);
+
+    dataPeserta* newPeserta = (dataPeserta*)malloc(sizeof(dataPeserta));
+    if (newPeserta != NULL) {
+        strcpy(newPeserta->nisn, nisn);
+        strcpy(newPeserta->nama, peserta->namaLengkap); // Ambil nama dari Peserta
+        strcpy(newPeserta->status, "Menunggu");
+        newPeserta->next = NULL;
+        tambahPeserta(pesertaHead, newPeserta);
+        printf("Biodata disimpan untuk NISN: %s\n", nisn);
+    }
 }
 
 void tambahPeserta(dataPeserta** head, dataPeserta* peserta) {
@@ -118,7 +136,7 @@ void tambahPeserta(dataPeserta** head, dataPeserta* peserta) {
     }
 }
 
-dataPeserta* cariPeserta(dataPeserta* head, char* nisn) {
+dataPeserta* cariPeserta(dataPeserta* head, const char* nisn) {
     dataPeserta* current = head;
     while (current != NULL) {
         if (strcmp(current->nisn, nisn) == 0) {
@@ -129,32 +147,29 @@ dataPeserta* cariPeserta(dataPeserta* head, char* nisn) {
     return NULL;
 }
 
-void enqueuePeserta(Queue* Q, const char* nisn, dataPeserta* pesertaHead) {
-    dataPeserta* peserta = cariPeserta(pesertaHead, (char*)nisn);
+void enqueuePeserta(Queue* Q, const char* nisn, dataPeserta* pesertaHead, Peserta* pesertaHanif) {
+    dataPeserta* peserta = cariPeserta(pesertaHead, nisn);
     if (peserta == NULL) {
         printf("Peserta dengan NISN %s tidak ditemukan!\n", nisn);
         return;
     }
-    int id = atoi(nisn);
-    printf("Enqueuing ID: %d for NISN: %s\n", id, nisn);
-    infotype dataToEnqueue;
-    strcpy(dataToEnqueue.prodi, nisn);
+    QueueInfo dataToEnqueue;
+    strcpy(dataToEnqueue.nisn, pesertaHanif->nisn);
+    strcpy(dataToEnqueue.namaLengkap, pesertaHanif->namaLengkap);
+    printf("Antiran peserta: %s (NISN: %s)\n", dataToEnqueue.namaLengkap, dataToEnqueue.nisn);
     EnQueue(Q, dataToEnqueue);
 }
 
 
 dataPeserta* dequeuePeserta(Queue* Q, dataPeserta* pesertaHead) {
-    infotype id;
+    QueueInfo info;
     if (!is_Empty(*Q)) {
-        deQueue(Q, &id);
-        char nisn[5];
-        sprintf(nisn, "%d", id);
-        printf("Debug: Dequeuing ID %d, searching NISN %s\n", id, nisn);
-        dataPeserta* peserta = cariPeserta(pesertaHead, nisn);
+        deQueue(Q, &info);
+        dataPeserta* peserta = cariPeserta(pesertaHead, info.nisn);
         if (peserta == NULL) {
-            printf("Warning: No matching peserta for ID %d (NISN %s)\n", id, nisn);
+            printf("Peserta dengan ID %d (NISN %s) tidak ditemukan\n", info.nisn);
         } else {
-            printf("Debug: Found peserta with NISN %s\n", peserta->nisn);
+            printf("Peserta ditemukan dengan NISN %s\n", peserta->nisn);
         }
         return peserta;
     }
@@ -164,34 +179,136 @@ dataPeserta* dequeuePeserta(Queue* Q, dataPeserta* pesertaHead) {
 
 void lihatAntrian(Queue Q, dataPeserta* pesertaHead) {
     if (is_Empty(Q)) {
-        printf("Antrean kosong!\n");
+        printf("=== Daftar Antrian Kosong ===\n");
+        printf("Tekan Enter untuk kembali ke menu admin...\n");
+        getchar();
         return;
     }
-    printf("Daftar Antrian:\n");
-    address current = First(Q.L);
+    printf("=== Daftar Antrian Peserta ===\n");
+    printf("--------------------------------\n");
+    queueAddress current = First(Q.L);
     int i = 1;
-    int found = 0;
     while (current != NULL) {
-        char nisn[5];
-        sprintf(nisn, "%d", Info(current));
-        dataPeserta* peserta = cariPeserta(pesertaHead, nisn);
-        if (peserta != NULL) {
-            printf("%d. NISN: %s, Nama: %s, Status: %s\n", i++, peserta->nisn, peserta->nama, peserta->status);
-            found = 1;
-        } else {
-            printf("Debug: No peserta found for ID %d\n", Info(current));
-        }
-        current = Next(current);
+        QueueInfo info = current->info;
+        dataPeserta* peserta = cariPeserta(pesertaHead, info.nisn);
+        printf("%d. NISN: %s | Nama: %s | Status: %s\n",
+               i++, info.nisn, info.namaLengkap,
+               peserta ? peserta->status : "Tidak Diketahui");
+        current = current->next;
     }
-    if (!found) {
-        printf("Tidak ada data peserta yang dapat ditampilkan untuk antrean saat ini.\n");
-    }
+    printf("--------------------------------\n");
+    printf("Tekan Enter untuk kembali ke menu admin...\n");
+    getchar();
 }
 
 void konfirmasiAntrian(Queue* Q, dataPeserta* pesertaHead) {
-    dataPeserta* peserta = dequeuePeserta(Q, pesertaHead);
-    if (peserta != NULL) {
-        strcpy(peserta->status, "Dikonfirmasi");
-        printf("Pendaftar dengan NISN %s dikonfirmasi!\n", peserta->nisn);
+    if (is_Empty(*Q)) {
+        printf("=== Antrian Kosong ===\n");
+        printf("Tidak ada peserta untuk dikonfirmasi.\n");
+        printf("Tekan Enter untuk kembali ke menu admin...\n");
+        getchar();
+        return;
     }
+
+    // Ambil peserta pertama (FIFO)
+    queueAddress first = First(Q->L);
+    QueueInfo info = first->info;
+    dataPeserta* peserta = cariPeserta(pesertaHead, info.nisn);
+
+    if (peserta != NULL) {
+        printf("=== Konfirmasi Antrian Peserta ===\n");
+        printf("--------------------------------\n");
+        printf("Peserta: NISN: %s | Nama: %s | Status: %s\n",
+               info.nisn, info.namaLengkap, peserta->status);
+        printf("--------------------------------\n");
+
+        char konfirmasi;
+        printf("Konfirmasi peserta %s (NISN: %s)? (y/n): ", info.namaLengkap, info.nisn);
+        scanf(" %c", &konfirmasi);
+        getchar();
+
+        if (konfirmasi == 'y' || konfirmasi == 'Y') {
+            strcpy(peserta->status, "Dikonfirmasi");
+            Q->L.First = first->next;
+            printf("Status diperbarui untuk NISN %s: %s\n", peserta->nisn, peserta->status);
+            free(first);
+            printf("Peserta dengan NISN %s berhasil dikonfirmasi!\n", peserta->nisn);
+        } else {
+            printf("Konfirmasi dibatalkan untuk peserta %s.\n", info.namaLengkap);
+        }
+    } else {
+        printf("Peserta dengan NISN %s tidak ditemukan dalam data.\n", info.nisn);
+    }
+    printf("Tekan Enter untuk kembali ke menu admin...\n");
+    getchar();
+}
+
+void prosesLogin(User* akunHead, Queue* antrean, dataPeserta** pesertaHead) {
+    char email[MAX_EMAIL], password[MAX_PASSWORD];
+    printf("Login Akun SNBT\n");
+    printf("Masukkan email: ");
+    fgets(email, MAX_EMAIL, stdin);
+    email[strcspn(email, "\n")] = 0;
+    printf("Masukkan Password: ");
+    fgets(password, MAX_PASSWORD, stdin);
+    password[strcspn(password, "\n")] = 0;
+
+    if (loginAkun(akunHead, email, password)) {
+        if (strcmp(email, "admin@admin.com") == 0) {
+            menuAdmin(antrean, *pesertaHead);
+        } else {
+            printf("Login Berhasil. Selamat datang!.\n");
+            return;
+        }
+    } else {
+        printf("Login gagal! Email atau password salah.\n");
+    }
+}
+
+void menuAdmin(Queue* antrean, dataPeserta* pesertaHead) {
+    int pilihan;
+    while (1) {
+        printf("Selamat Datang Admin\n");
+        printf("1. Lihat Antrian\n2. Konfirmasi Antrian\n3. Keluar\n");
+        printf("Masukkan pilihan: ");
+        scanf("%d", &pilihan);
+        getchar();
+        if (pilihan == 1) lihatAntrian(*antrean, pesertaHead);
+        else if (pilihan == 2) konfirmasiAntrian(antrean, pesertaHead);
+        else if (pilihan == 3) break;
+        else printf("Pilihan tidak valid!\n");
+    }
+}
+
+void tampilkanKartuPeserta(Peserta* peserta, Stack* stackProdi, Address lokasiUjian) {
+    printf("\n===================================================\n");
+    printf("           KARTU PESERTA UTBK-SNBT           \n");
+    printf("===================================================\n\n");
+
+    printf("Nama Lengkap    : %s\n", peserta->namaLengkap);
+    printf("Tanggal Lahir   : %s\n", peserta->tanggalLahir);
+    printf("NISN            : %s\n", peserta->nisn);
+
+    printf("\nPilihan Program Studi:\n");
+    if (IsEmpty(*stackProdi)) {
+        printf("  Belum ada prodi yang dipilih.\n");
+    } else {
+        char pilihanUniversitas[4][64];
+        char pilihanProdi[4][32];
+        int i = 0;
+
+        for (address p = First(stackProdi->Top); p != NULL && i < 4; p = p->next) {
+            strcpy(pilihanUniversitas[i], p->info.universitas);
+            strcpy(pilihanProdi[i], p->info.prodi);
+            i++;
+        }
+
+        for (int idx = i - 1, no = 1; idx >= 0; idx--, no++) {
+            printf("  Pilihan %d: %s - %s\n", no, pilihanUniversitas[idx], pilihanProdi[idx]);
+        }
+    }
+
+    printf("\nTempat Ujian    : %s\n", lokasiUjian ? lokasiUjian->namaUniv : "Belum ditentukan");
+
+    printf("===================================================\n\n");
 }
