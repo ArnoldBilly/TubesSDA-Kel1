@@ -284,21 +284,3 @@ void displayBioPeserta(Peserta *peserta){
 
     } while (choice == 0);
 }
-
-void addPeserta(Peserta* peserta,User* user){
-FILE* file;
-file = fopen("BasisDataBiodata.txt","a");
-fprintf(file,"%s,%s\n",user->email,user->password);
-fprintf(file, "Nama Lengkap    : %s\n", peserta->namaLengkap);
-fprintf(file, "Tempat Lahir    : %s\n", peserta->tempatLahir);
-fprintf(file, "Tanggal Lahir   : %s\n", peserta->tanggalLahir);
-fprintf(file, "NISN            : %s\n", peserta->nisn);
-fprintf(file, "NPSN            : %s\n", peserta->npsn);
-fprintf(file, "Nama Sekolah    : %s\n", peserta->namaSekolah);
-fprintf(file, "Nama Ayah       : %s\n", peserta->namaAyah);
-fprintf(file, "Nama Ibu        : %s\n", peserta->namaIbu);
-fprintf(file, "Jumlah Tanggungan : %s\n",peserta->jumlahTanggungan);
-fprintf(file, "Gaji Ayah       : %s\n", peserta->gajiAyah);
-fprintf(file, "Gaji Ibu        : %s\n", peserta->gajiIbu);
-fclose(file);
-}
